@@ -17,6 +17,3 @@ spec:
           image: peterevans/vegeta:latest
           command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
 
-
-
-
