@@ -3,28 +3,33 @@ kind: Deployment
 metadata:
   name: jsdemo
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      name: jsdemo
+      app: jsdemo
+  replicas: 2
   template:
     metadata:
       labels:
-        name: jsdemo
+        app: jsdemo
     spec:
       containers:
-        - name: jsdemo
-          image: thenjdevopsguy/jsappturbo:latest
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: jsdemo-svc
-#   labels:
-#     app: jsdemo
-# spec:
-#   type: LoadBalancer
-#   ports:
-#   - port: 8080
-#   selector:
-#     app: nginx
+      - name: jsdemo
+        image: thenjdevopsguy/jsappturbo:latest
+        ports:
+        - containerPort: 3000
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jsdemo
+  labels:
+    app: jsdemo
+spec:
+  type: LoadBalancer
+  selector:
+    app: jsdemo
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
