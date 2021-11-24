@@ -14,4 +14,4 @@ Prerequisites:
 3. You can now run `kubectl get pods` and see that Vegeta is running.
 4. Run the following command to execute a test against the running pod:
 
-`kubectl exec vegeta-operator-7cdcf76d4c-xvzb2 -- sh -c "echo 'GET https://some_ip_address_or_hostname' | vegeta attack -rate=10 -duration=30s | tee results.bin | vegeta report"`
+`kubectl exec vegeta-operator-7cdcf76d4c-xvzb2 -- sh -c "echo 'GET https://some_ip_address_or_hostname' | vegeta attack -rate=10 -max-workers 150 -duration=10m | tee results.bin | vegeta report"`
